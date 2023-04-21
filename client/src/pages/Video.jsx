@@ -122,6 +122,7 @@ max-width: 72px
 
 const Video = () => {
   const { currentVideo } = useSelector((state) => state.video)
+  // const [currentVideo, setCurrentVideo] = useState({})
   const { currentUser } = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
@@ -136,8 +137,9 @@ const Video = () => {
         const channelRes = await axios.get(
           `/users/find/${videoRes.data.userId}`
         )
-        //console.log(videoRes.data.title)
+        console.log(videoRes.data.title)
         setChannel(channelRes.data)
+        // setCurrentVideo(videoRes.data)
 
         dispatch(fetchSuccess(videoRes.data))
       } catch (err) {}
@@ -169,7 +171,11 @@ const Video = () => {
           <VideoFrame
             src={currentVideo.videoUrl}
             controls
-            style={{ maxWidth: '680px' }}
+            style={{
+              maxWidth: '680px',
+              maxHeight: '400px',
+              backgroundImage: 'cover',
+            }}
           />
         </VideoWrapper>
         <Title>{currentVideo.title}</Title>
